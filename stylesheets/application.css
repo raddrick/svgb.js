@@ -1,0 +1,55 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+ *= require bootstrap
+*/
+
+
+svg.header {
+  margin-left:20px;
+}
+
+svg .btn {
+  fill:#000000;
+  stroke-opacity:0;
+  fill-opacity:0;
+  cursor: pointer;
+}
+
+svg .btn:hover {
+  fill:#ffffff;
+  fill-opacity:0.3;
+}
+svg .stages {}
+
+svg.fixed {
+  z-index:-1000;
+  position:fixed;
+  top:0px;
+}
+svg .main.menu text {
+  fill:#542147;
+  font: 13px verdana, arial, helvetica, sans-serif;
+}
+svg .main.menu g.button line.left { 
+  stroke-width:2;
+  stroke-opacity:1;
+  stroke:#fcb43f;
+}
+svg .main.menu g.button line.right { 
+  stroke-width:2;
+  stroke-opacity:1;
+  stroke:#fecd83;
+}
+svg .main.menu g.button rect.base { 
+  fill:#ffde00;
+  fill-opacity:0.3;
+  stroke-width:0; 
+}
+svg .sub.menu text{
+  fill:#efefef;
+  font: 11px verdana, arial, helvetica, sans-serif;
+}
