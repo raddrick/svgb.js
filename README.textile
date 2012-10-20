@@ -131,6 +131,7 @@ Instructions to come on submitting bugs, feature requests, submit patches, maili
 
 
 h2. Changelog
+
 *0.2*
 * added ground work for sprockets
 * added ground work for jasmine test suite's
