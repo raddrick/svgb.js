@@ -1,6 +1,6 @@
 (function($) {
   
-  window.svgb.Transform = Backbone.Model.extend({
+  window.svgb.Models.Transform = Backbone.Model.extend({
     defaults: {
       translate:{ x:0, y:0, dirty:false }, 
       scale:{ sx:0, sy:[0], dirty:false }, 
@@ -184,4 +184,4 @@
       return  res.length > 0 ? res.substring(0, res.length - 1) : false;
     }
   });
-})(jQuery);
+})();

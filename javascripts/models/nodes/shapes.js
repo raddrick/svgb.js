@@ -1,7 +1,7 @@
-(function($){
+(function(){
 
 // path
-  window.svgb.Path = window.svgb.Point.extend({
+  window.svgb.Models.Path = window.svgb.Models.Point.extend({
     defaults: {
       'd': ""
     },    
@@ -57,6 +57,7 @@
   });
     
 // rect
+(function($) {
 //   height
 //   width
   window.svgb.Rect = window.svgb.Point.extend({
@@ -72,7 +73,7 @@
 // elipse
 //   rx
 //   ry
-  window.svgb.Elipse = window.svgb.Point.extend({
+  window.svgb.Ellipse = window.svgb.Point.extend({
     defaults: {
       'rx':0,
       'ry':0
@@ -82,4 +83,4 @@
     }
   });
 
-})(jQuery);
+})();

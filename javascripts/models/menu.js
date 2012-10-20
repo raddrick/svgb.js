@@ -1,4 +1,4 @@
-(function($){
+(function(){
 
   // name:"main",
   // x:4,
@@ -12,7 +12,7 @@
   //     title:"Overview",
   //     url:"#overview" 
   //   }
-  window.svgb.Menu = window.svgb.Point.extend({
+  window.svgb.Models.Menu = window.svgb.Models.Point.extend({
     defaults: {
       "tag":"g",
       "width":0,
@@ -64,4 +64,4 @@
       return this.el;
     } 
   });
-})(jQuery);
+})();

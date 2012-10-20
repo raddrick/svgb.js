@@ -1,6 +1,6 @@
-(function($){
+(function(){
     window.svgb.FrameView = Backbone.View.extend({
-    tagName: 'div',
+    tagName: 'svg',
     className: this.model ? 'svgb ' + this.model.attributes.css : 'svgb',
     
     mousemove: function(evt){
@@ -68,4 +68,4 @@
       }
     }
   });
-})(jQuery);
+})();

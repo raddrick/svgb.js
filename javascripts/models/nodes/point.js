@@ -1,8 +1,9 @@
+(function($) {
 // object
 //   x
 //   y
 //   options
-  window.svgb.Point = Backbone.Model.extend({
+  window.svgb.Models.Point = Backbone.Model.extend({
     el:null,
     events:null,
     defaults: {
@@ -99,3 +100,4 @@
       return this.el;
     }
   });
+})();

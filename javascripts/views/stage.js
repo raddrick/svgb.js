@@ -1,4 +1,4 @@
-(function($){
+(function(){
   window.svgb.StageView = Backbone.View.extend({
     tagName: 'g',
     className: 'svgb-view',
@@ -25,4 +25,4 @@
       $(this.el).find(".base").html(content);
      }
   });
-})(jQuery);
+})();

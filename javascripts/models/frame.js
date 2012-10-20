@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 (function($) {
   
-  window.svgb.Frame = Backbone.Model.extend({
+  window.svgb.Models.Frame = Backbone.Model.extend({
     defaults: {
       'viewBox': [0,0,200,200],
       'width':500,
@@ -13,6 +13,4 @@
       
     }
   });
-    
-
-})(jQuery);
+})();
