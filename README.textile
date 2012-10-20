@@ -1,0 +1,143 @@
+h1. svgb
+
+h3. A boilerplate for your svg and backbone objects
+
+__svgb__ bring's SVG together with Backbone.js, Underscore.js, jQuery/JS and HTML5 driving the clientside.  __svgb__ attempts to lay the ground work for an SVG driven games, advertisment, and other RIA web application. 
+
+*NOTE*
+I think I will be removing the Rails from this project, leaving it purely clientside, and creating an __svgb-rails__ gem to bring it all together..
+
+
+h2. Description
+
+The current state of this project is crude, and I will turn it into a gem or an engine once I complete the ground work.
+
+So far this is how to set the frame and stage up to have your svg injected into it:
+
+bc.. <script type="text/javascript">
+  jQuery(function(){
+    var svgb_collection = new SVGBStages(
+      [{
+        name:'main', 
+        transform:'translate(0,0)', 
+        options: ''
+      }]);
+    var svgb_model = new SVGBFrame({
+        id:'0',
+        height:'500',
+        width:'500',
+        viewbox:'0 0 200 200',
+        options:''
+      });
+    var svgb_view = new SVGBFrameView({ 
+        collection:svgb_collection,
+        model:svgb_model
+      });
+    var svgb_ctrl_cursor_pos = new SVGBControl({
+        name:'mouse_coords',
+        x:0,
+        y:0
+      });
+    $("#container").append(svgb_view.render().el);
+  })
+</script>
+
+p. 
+
+Templates are defined as such:
+
+bc.. <script type="text/template" id="svgb-path">
+  <path d="<@= d @>" <@= options @>/>
+</script>
+
+p. Using <==@== ==@==> and <==@=== ==@==> for client side interpolation
+
+h3. Coming down the pipe:
+
+* Controls
+* I/O events
+* Dropping a Point
+* Drawing a line between Points
+* Using a control to build a Dialog
+* Backbone models: shape, point, transform
+* Rails models: frame, stage, template 
+
+
+h2. Documentation
+
+h3. Configuration
+
+* This is currently just a rails project, more details to come soon..
+
+*TODO*
+
+
+h3. Installation
+
+* Configure your database.yml file
+
+In a terminal, navigate to your desired install directory and run:
+
+bc.. $ git clone *fillmein.github.com\svgb.git*
+
+$ cd svgb
+
+$ bundle install
+
+$ rake db:create db:migrate
+
+$ rails s
+
+p. 
+
+h3. Operating
+
+Currently, all this does, is generate, via backbone.js and underline.js, a frame and a single stage (if defined by demo code above).
+
+h3. Manifest
+
+* *TODO*
+
+h3. Bugs
+
+* *TODO*
+
+h3. Troubleshooting
+
+* *TODO*
+
+h3. Credits and Acknowledgements
+
+* Rick Graham. ==@==radd_rick ==@==raddstudio
+
+
+h2. Copyright and licensing
+
+Copyright (C) 2011 Rick Graham
+
+*MIT Licence.*
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+h2. Contact information
+
+* rick [at] raddstudio [dot] com
+
+Instructions to come on submitting bugs, feature requests, submit patches, mailing list, get announcements, or how to join the user or dev community
+
+
+h2. Changelog
+
+*0.1*
+* Backbone models for Frame and Stages
+* Frames capture a mousemove event
+* Stages contain two <g> for node injection, defined by selectors: 
+
+p((. .active-data
+.base-data
+
+* Templates for SVG shapes, Frame, Stage, Point, dialog, and ctrl-mouse-position
