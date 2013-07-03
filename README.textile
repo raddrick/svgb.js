@@ -1,6 +1,7 @@
 h1. svgb
 
-h3. A boilerplate for your svg and backbone objects
+h3. A boilerplate for your svg and backbone objects (TDD Version, Jasmine)
+
 
 __svgb__ bring's SVG together with Backbone.js, Underscore.js, jQuery/JS and HTML5 driving the clientside.  __svgb__ attempts to lay the ground work for an SVG driven games, advertisment, and other RIA web application. 
 
