@@ -60,15 +60,14 @@
       </ul>
     </div>
     <script type="text/javascript">
-    (function(){
       var frame = {
         el: null,
         model: null,
         view: null,
         create: function(options){
           if (options.el) this.el=options.el;
-          this.model=svgb.models.Frame();
-          this.view=svgb.views.Frame({el: this.el, model: this.model});
+          this.model=new svgb.models.Frame();
+          this.view=new svgb.views.Frame({el: this.el, model: this.model});
           this.update({view: this.view.render()});
         },
         update: function(options){
@@ -81,11 +80,6 @@
       frame.create({
         el: ".frame tr.100x100 td.test"
       });
-    });
-
-
-
-
     </script>
 	</body>
 </html>
