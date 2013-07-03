@@ -6,6 +6,7 @@
       // _.bindAll(this, 'render');
       // this.template = _.template($('#tmpl-svgb-frame').html());
       if (options.el) this.el = options.el;
+      if (options.model) this.model = options.model;
       //if (options.stages) this.options.stages.bind('reset', this.render);
       //if (options.controls) this.options.controls.bind('reset', this.render);
     },
@@ -19,7 +20,6 @@
       //   $(this.el).append(content);
       // }
     },
-
     render: function(){
       // var $stages_el,
       //   $controls_el,
