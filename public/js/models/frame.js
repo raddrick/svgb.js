@@ -3,7 +3,6 @@
 (function() {
   
   svgb.models.Frame = svgb.Model.extend({
-    el: null,
     view: null,
     defaults: {
       'viewBox': [0,0,200,200],
