@@ -11,7 +11,9 @@
     init: function(){
 
     },
-    selectors: function(s){
+    find_by_selector: function(s){
+      return $(s);
+
       s=s.spilt(" ");
       var el=null;
       for(var i=0 ; i<s.length ; i++){
@@ -55,7 +57,7 @@
       }
     },
     to_svg: function(v){
-      if(!this.svg) return convert_to('svg', v);
+      if(!this.svg) return this.convert_to('svg', v);
     },
     to_html: function(v){
       if(!this.html) return convert_to('html',v);
@@ -67,6 +69,7 @@
       var update = {
         svg: function(content){
           var parser = new DOMParser();
+          if (!content) content ="";
           if (content.indexOf("svg")<0){
             content = "<svg xmlns=\"http://www.w3.org/2000/svg\" " +
             "xmlns:xlink=\"http://www.w3.org/1999/xlink\" " +
@@ -77,12 +80,12 @@
           var SVGRoot = SVGDoc.getElementsByTagName('svg')[0];
           var adopted = document.importNode(SVGRoot, true);
           content = $(adopted).children();
-          var el = document.createElementNS(SVGNS, "svg");
+          this.svg = document.createElementNS(SVGNS, "svg");
 
           for (var i = 0 ; i < content.length ; i++ ){
-            el.appendChild(content[i]);
+            this.svg.appendChild(content[i]);
           }
-          return el.firstChild[0] ? el.firstChild[0] : false;
+          return this.svg;
         }
       };
 

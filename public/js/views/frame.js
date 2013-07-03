@@ -6,8 +6,11 @@
       // _.bindAll(this, 'render');
       // this.template = _.template($('#tmpl-svgb-frame').html());
       if (options.el) this.el = options.el;
+      if(typeof this.el == "string") this.el=this.find_by_selector(this.el);
+
       if (options.model) this.model = options.model;
       if (options.template) this.template = options.template;
+
       //if (options.stages) this.options.stages.bind('reset', this.render);
       //if (options.controls) this.options.controls.bind('reset', this.render);
     },
@@ -54,9 +57,9 @@
       
 
       //$(this.el).mousemove(_.bind(this.mousemove,this));
-      this.el=this.model.to_sql();
-      
-      return this.el;
+      this.el.append(this.to_svg());
+
+      return this;
     },
 
     //Events
