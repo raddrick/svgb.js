@@ -78,7 +78,7 @@
           var SVGDoc = parser.parseFromString(content, "text/xml");
 
           var SVGRoot = SVGDoc.getElementsByTagName('svg')[0];
-          var adopted = document.importNode(SVGRoot, true); 
+          var adopted = document.importNode(SVGRoot, true);
           content = $(adopted).children();
           this.svg = document.createElementNS(SVGNS, "svg");
 
