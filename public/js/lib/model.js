@@ -5,7 +5,7 @@
     string: "",
     svg: null,
     html: null,
-    initialize: function(){
+    init: function(){
 
     },
     to_svg: function(v){

@@ -11,7 +11,7 @@
       'height':500,
       'masked':true
     },
-    initialize: function(options){
+    init: function(options){
 
     }
   });

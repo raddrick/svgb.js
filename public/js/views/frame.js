@@ -2,7 +2,7 @@
     svgb.views.Frame = svgb.View.extend({
     tagName: 'svg',
     className: this.model ? 'svgb ' + this.model.attributes.css : 'svgb',
-    initialize: function(options){
+    init: function(options){
       // _.bindAll(this, 'render');
       // this.template = _.template($('#tmpl-svgb-frame').html());
       if (options.el) this.el = options.el;

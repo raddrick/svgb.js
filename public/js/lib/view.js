@@ -4,7 +4,7 @@
     className: this.model ? 'svgb ' + this.model.attributes.css : 'svgb',
     el: null,
     model: null,
-    initialize: function(){
+    init: function(){
 
     },
     selectors: function(s){
