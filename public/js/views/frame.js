@@ -7,6 +7,7 @@
       // this.template = _.template($('#tmpl-svgb-frame').html());
       if (options.el) this.el = options.el;
       if (options.model) this.model = options.model;
+      if (options.template) this.template = options.template;
       //if (options.stages) this.options.stages.bind('reset', this.render);
       //if (options.controls) this.options.controls.bind('reset', this.render);
     },
@@ -53,6 +54,7 @@
       
 
       //$(this.el).mousemove(_.bind(this.mousemove,this));
+      this.el=this.model.to_sql();
       
       return this.el;
     },
