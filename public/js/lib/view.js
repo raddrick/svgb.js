@@ -78,10 +78,14 @@
           var SVGDoc = parser.parseFromString(content, "text/xml");
 
           var SVGRoot = SVGDoc.getElementsByTagName('svg')[0];
-          var adopted = document.importNode(SVGRoot, true);
+          var adopted = document.importNode(SVGRoot, true); 
           content = $(adopted).children();
           this.svg = document.createElementNS(SVGNS, "svg");
 
+          for (var i = 0 ; i < content.context.attributes.length ; i++ ){
+            var a=content.context.attributes[i];
+            this.svg.setAttribute(a.nodeName, a.childNodes[0].data);
+          }
           for (var i = 0 ; i < content.length ; i++ ){
             this.svg.appendChild(content[i]);
           }
