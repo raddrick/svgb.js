@@ -58,7 +58,7 @@
 
       //$(this.el).mousemove(_.bind(this.mousemove,this));
       this.el.append(this.to_svg());
-
+      this.el=this.el[0].firstChild;
       return this;
     },
 
