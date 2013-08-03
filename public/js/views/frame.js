@@ -57,8 +57,12 @@
       
 
       //$(this.el).mousemove(_.bind(this.mousemove,this));
-      this.el.append(this.to_svg());
-      this.el=this.el[0].firstChild;
+      if (typeof this.el.append == "undefined"){
+        this.el.appendChild(this.model.to_svg());
+      }else{
+        this.el.append(this.to_svg());
+        this.el=this.el[0].firstChild;
+      }
       return this;
     },
 
