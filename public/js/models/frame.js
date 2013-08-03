@@ -11,7 +11,12 @@
       'masked':true
     },
     init: function(options){
-
+      if (options){
+        if (options.viewBox) this.defaults.viewBox=options.viewBox;
+        if (options.width) this.defaults.width=options.width;
+        if (options.height) this.defaults.height=options.height;
+        if (options.masked) this.defaults.masked=options.masked;
+      }
     }
   });
 })();
