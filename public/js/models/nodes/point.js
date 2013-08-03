@@ -16,9 +16,16 @@
       'defs':'',
       'transform':'' //TODO: support array values for int's
     },
-    init: function(point){
-      this.transform = new svgb.Transform();
-      if (this.attributes.tag) this.render();
+    init: function(options){
+      this._super();
+      this.transform = new svgb.models.Transform();
+      //if (this.attributes.tag) this.render();
+      if (options.x)      this.attributes.x = options.x;
+      if (options.y)      this.attributes.y = options.y;
+      if (options.css)    this.attributes.css = options.css;
+      if (options.style)  this.attributes.style = options.style;
+      if (options.defs)   this.attributes.defs = options.defs;
+      if (options.transform) this.attributes.transform = options.transform;
     },
     transform: null,
     setPin: function(){
