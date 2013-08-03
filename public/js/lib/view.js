@@ -96,6 +96,9 @@
       switch(type){
         case "svg":
           value=update.svg(value);
+          for (var i = 0 ; i < this.model.nodes.length ; i++ ){
+            value.appendChild(this.model.nodes[i].el);
+          }
           break;
         case "html":
           // TODO
