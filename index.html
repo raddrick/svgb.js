@@ -28,61 +28,132 @@
          <script type="text/javascript" src="/js/collections/controls.js"></script> 
     -->
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/application.css"/>
+    <style type="text/css">
+      body { font-family: Arial, Verdana; }
+      ul { padding-left: 10px; }
+      li { list-style: none; }
+      table { width:100%;border: solid 1px #efefef; }
+      thead { text-align: left; }
+      tr {  }
+      td { background-color:#efefef; }
+      td.name { width:50%; }
+      td.test { width:50%;text-align:center;padding:10px; }
+
+      svg { background-color:#ffffff; }
+    </style>
+
 	</head>
 	<body>
 		<h1>svgb</h1>
-    <h2>A js library for SVG objects</h2>
-    <div>
-      <ul>
-        <li>
-          <h3>Test suite</h3>
-          <desc>
-            this are the results of the tests
-          </desc>
-          <ul>
-            <li>
-              <h4>Frame</h4>
-              <table class="frame">
+    <h3>Test suite</h3>
+    <desc>
+      A js library for SVG objects
+    </desc>
+    <ul>
+      <li>
+        <ul>
+          <li>
+            <table class="frame">
+              <thead>
+                <tr><th colspan="2">Frame</th></tr>
+              </thead>
+              <tfoot>
+                <tr><td colspan="2"></td></tr>
+              </tfoot>
+              <tbody>
+                <tr class="default"><td class="name">default</td><td class="test"></td></tr>
+                <tr class="point"><td class="name">point</td><td class="test"></td></tr>
                 <tr class="100x100"><td class="name">100x100</td><td class="test"></td></tr>
-              </table>
-            </li>
-            <!--li>
-              <h4>Shapes</h4>
-              <table>
-                <!--tr class="point"><td class="name">Point</td></td><td class="test"></td></tr-->
-                <!--tr class="name"><td class="name">Line</td></td><td class="test"></td></tr-->
-                <!--tr><td class="name">Rect</td></td><td class="test"></td></tr-->
-                <!--tr><td class="name">Elipse</td></td><td class="test"></td></tr-->
-                <!--tr><td class="name">Polyline</td></td><td class="test"></td></tr-->
-                <!--tr><td class="name">Polygone</td></td><td class="test"></td></tr-->
-                <!--tr><td class="name">Path</td></td><td class="test"></td></tr-->
-              </table>
-            </li-->
-          </ul>
-        </li>
-      </ul>
-    </div>
+              </tbody>
+            </table>
+          </li>
+          <!--li>
+            <h4>Shapes</h4>
+            <table>
+              <!--tr class="point"><td class="name">Point</td></td><td class="test"></td></tr-->
+              <!--tr class="name"><td class="name">Line</td></td><td class="test"></td></tr-->
+              <!--tr><td class="name">Rect</td></td><td class="test"></td></tr-->
+              <!--tr><td class="name">Elipse</td></td><td class="test"></td></tr-->
+              <!--tr><td class="name">Polyline</td></td><td class="test"></td></tr-->
+              <!--tr><td class="name">Polygone</td></td><td class="test"></td></tr-->
+              <!--tr><td class="name">Path</td></td><td class="test"></td></tr-->
+            </table>
+          </li-->
+        </ul>
+      </li>
+    </ul>
     <script type="text/javascript">
-      var frame = {
-        el: null,
-        model: null,
-        view: null,
-        create: function(options){
-          if (options.el) this.el=options.el;
-          this.model=new svgb.models.Frame();
-          this.view=new svgb.views.Frame({el: this.el, model: this.model});
-          this.update({view: this.view.render()});
-        },
-        update: function(options){
-          if (options.el) this.el=options.el;
-          if (options.model) this.el=options.model;
-          if (options.view) this.el=options.view;
-        }
-      };
+      var tests = {
+        //test definitions
+        default: function(){
+          var m="test should render an svg frame with no options"
+          var frame=setup("tr.default",{'message':m});
 
-      frame.create({
-        el: ".frame tr.100x100 td.test"
-      });
+          console.log(frame);
+        },
+        "point": function(){
+          var m="test should render an svg frame that is 100x100"
+          var frame=setup("tr.point",{'message':m});
+
+          var p=new svgb.models.Point({x:100, y:100});
+          frame.model.append(p);
+          frame.update();
+
+          console.log(frame);
+        },
+        "100x100": function(){
+          var m="test should render an svg frame that is 100x100"
+          var frame=setup("tr.100x100",{'message':m});
+
+          var r=new svgb.models.Rect({x:10, y:10, height:100, width:100});
+          frame.model.append(r);
+          frame.update();
+
+          console.log(frame);
+        },
+        //this method will iterate through the tests and execute them
+        run: function(){
+          for(var t in this){
+            if(t!="run") this[t]();
+          }
+          return this;
+        }
+      }
+      tests.run();
+
+      function setup(selector, options){
+        // this is a frame that will encapsulate each test, you can add 
+        // by updating it's model
+        var frame = {
+          el: null,
+          model: null,
+          view: null,
+          // builds a new frame model and view for the test to build up
+          // within.
+          create: function(options){
+            if (options.el) this.el=options.el;
+            this.model=new svgb.models.Frame();
+            this.view=new svgb.views.Frame({el: this.el, model: this.model});
+            this.update();
+            return this;
+          },
+          // update the view with the contents of the frame
+          update: function(options){
+            if (options) {
+              if (options.el) this.el=options.el;
+              if (options.model) this.model=options.model;
+              if (options.view) this.view=options.view;
+            }
+            this.view.render();
+            this.el=this.view.el;
+          }
+        };
+
+        return frame.create({
+          el: ".frame " + selector + " td.test",
+        });
+      }
+
     </script>
 	</body>
 </html>
