@@ -56,66 +56,26 @@
         }
       }
     },
-    to_svg: function(v){
-      if(!this.svg) return this.convert_to('svg', v);
+    update: function(context){
+      context.append(this.render().el);
     },
-    to_html: function(v){
-      if(!this.html) return convert_to('html',v);
+    append: function(content, stage_name, layer ){
+      // if (typeof stage_name != "undefined"){
+      //   $(this.el).find("g." + stage_name + " g."+ layer).append(content);
+      // } else {
+      //   $(this.el).append(content);
+      // }
     },
-    to_s: function(){
-      if(!this.string) return convert_to('string',v);
-    },
-    convert_to: function(type, value){
-      var update = {
-        svg: function(content){
-          var parser = new DOMParser();
-          if (!content) content ="";
-          if (content.indexOf("svg")<0){
-            content = "<svg xmlns=\"http://www.w3.org/2000/svg\" " +
-            "xmlns:xlink=\"http://www.w3.org/1999/xlink\" " +
-            "version=\"1.1\" type=\"image/svg+xml\">" + content + "</svg>";
-          }
-          var SVGDoc = parser.parseFromString(content, "text/xml");
-
-          var SVGRoot = SVGDoc.getElementsByTagName('svg')[0];
-          var adopted = document.importNode(SVGRoot, true);
-          content = $(adopted).children();
-          this.svg = document.createElementNS(SVGNS, "svg");
-
-          for (var i = 0 ; i < content.context.attributes.length ; i++ ){
-            var a=content.context.attributes[i];
-            this.svg.setAttribute(a.nodeName, a.childNodes[0].data);
-          }
-          for (var i = 0 ; i < content.length ; i++ ){
-            this.svg.appendChild(content[i]);
-          }
-          return this.svg;
-        }
-      };
-
-      switch(type){
-        case "svg":
-          value=update.svg(value);
-          for (var i = 0 ; i < this.model.nodes.length ; i++ ){
-            value.appendChild(this.model.nodes[i].el);
-          }
-          break;
-        case "html":
-          // TODO
-          Console.log("convert_to html called, but is not yet implemented");
-          break;
-        case "string":
-          // TODO
-          Console.log("convert_to string called, but is not yet implemented");
-          break;
-        default:
-          Console.log("convert_to <type> called, but type is unknown");
-          break;
-        }
-      if (!value) { value=false; Console.log("convert_to tried to convert from null"); }
-      return value;
+    render: function(){
+      //$(this.el).mousemove(_.bind(this.mousemove,this));
+      if (typeof this.el.append == "undefined"){
+        this.el.appendChild(this.model.to_svg());
+      }else{
+        this.el.append(this.model.to_svg());
+        this.el=this.el[0].firstChild;
+      }
+      return this.el;
     }
-  });
   // window.svgb.el = function(self) {
   //       var nodes = "";
   //       var node = "";
@@ -160,4 +120,5 @@
   //       }
   //       return $(el).contents();
   //   };
+  });
 }());

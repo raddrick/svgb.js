@@ -1,5 +1,6 @@
 (function(){
-    svgb.views.Frame = svgb.View.extend({
+  svgb.views.Frame = svgb.View.extend({
+    _type: "svgb.view.Frame",
     tagName: 'svg',
     className: this.model ? 'svgb ' + this.model.attributes.css : 'svgb',
     init: function(options){
@@ -14,15 +15,17 @@
       //if (options.stages) this.options.stages.bind('reset', this.render);
       //if (options.controls) this.options.controls.bind('reset', this.render);
     },
-    update: function(context){
-      context.append(this.render().el);
-    },
-    append: function(content, stage_name, layer ){
-      // if (typeof stage_name != "undefined"){
-      //   $(this.el).find("g." + stage_name + " g."+ layer).append(content);
-      // } else {
-      //   $(this.el).append(content);
-      // }
+    //Events
+    mousemove: function(evt){
+      this.coord = {};
+      evt = evt || window.event;
+      if(evt.pageX || evt.pageY){
+        this.coord =  { x:evt.pageX , y:evt.pageY };
+      }
+      this.model.coord =  {
+        x:evt.clientX + document.body.scrollLeft - document.body.clientLeft,
+        y:evt.clientY + document.body.scrollTop  - document.body.clientTop
+      };
     },
     render: function(){
       // var $stages_el,
@@ -54,30 +57,7 @@
       //   view = view.render().el;
       //   controls_el.append(view);
       // });
-      
-
-      //$(this.el).mousemove(_.bind(this.mousemove,this));
-      if (typeof this.el.append == "undefined"){
-        this.el.appendChild(this.model.to_svg());
-      }else{
-        this.el.append(this.to_svg());
-        this.el=this.el[0].firstChild;
-      }
-      return this;
-    },
-
-    //Events
-    mousemove: function(evt){
-      this.coord = {};
-      evt = evt || window.event;
-      if(evt.pageX || evt.pageY){
-        this.coord =  { x:evt.pageX , y:evt.pageY };
-      }
-      this.model.coord =  {
-        x:evt.clientX + document.body.scrollLeft - document.body.clientLeft,
-        y:evt.clientY + document.body.scrollTop  - document.body.clientTop
-      };
-      
+      return this._super();
     }
   });
 })();

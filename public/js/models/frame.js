@@ -3,8 +3,10 @@
 (function() {
   
   svgb.models.Frame = svgb.Model.extend({
+    _type: "svgb.model.Frame",
     view: null,
     defaults: {
+      'tag':'svg',
       'viewBox': [0,0,200,200],
       'width':500,
       'height':500,
@@ -13,10 +15,11 @@
     init: function(options){
       if (options){
         if (options.viewBox) this.defaults.viewBox=options.viewBox;
-        if (options.width) this.defaults.width=options.width;
-        if (options.height) this.defaults.height=options.height;
         if (options.masked) this.defaults.masked=options.masked;
+        if (options.width) this.defaults.width = options.width;
+        if (options.height) this.defaults.height = options.height;
       }
+      this._super(this.defaults);
     }
   });
 })();
