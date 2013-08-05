@@ -3,10 +3,11 @@
 // path
   window.svgb.models.Path = window.svgb.models.Point.extend({
     defaults: {
-      'd': ""
+      tag: 'path',
+      d: ""
     },
     init: function(){
-      
+      this._super(this);
     }
   });
 
@@ -15,19 +16,24 @@
 //   y2
   window.svgb.models.Line = window.svgb.models.Point.extend({
     defaults: {
-      'x2': 0,
-      'y2': 0
+      tag: 'line',
+      x2: 0,
+      y2: 0
     },
     init: function(){
-      
+      this._super(this);
     }
   });
 
 // polyline
 //   points
   window.svgb.models.Ployline = window.svgb.models.Point.extend({
+    defaults: {
+      tag: 'polyline',
+      points: []
+    },
     init: function(){
-      defaults['points']=[];
+      this._super(this);
     }
   });
 
@@ -35,9 +41,11 @@
 //   points
   window.svgb.models.Ploygon = window.svgb.models.Point.extend({
     defaults: {
-      'points': []
+      tag: 'polygon',
+      points: []
     },
     init: function(){
+      this._super(this);
       
     }
   });
@@ -46,10 +54,11 @@
 //   r
   window.svgb.models.Circle = window.svgb.models.Point.extend({
     defaults: {
-      'r': 0
+      tag: 'circle',
+      r: 0
     },
     init: function(){
-      
+      this._super(this);
     }
   });
     
@@ -58,12 +67,15 @@
 //   width
   window.svgb.models.Rect = window.svgb.models.Point.extend({
     node: null,
+    defaults: {
+      tag: 'rect',
+      height:10,
+      width:10
+    },
     init: function(options){
-      this.defaults['width']=10;
-      this.defaults['height']=10;
-      this._super(options);
-      if (options.width) this.attributes.width=options.width;
-      if (options.height) this.attributes.height=options.height;
+      if (options.width) this.defaults.width=options.width;
+      if (options.height) this.defaults.height=options.height;
+      this._super(this);
     }
   });
 
@@ -72,11 +84,12 @@
 //   ry
   window.svgb.models.Ellipse = window.svgb.models.Point.extend({
     defaults: {
-      'rx':0,
-      'ry':0
+      tag: 'ellipse',
+      rx:0,
+      ry:0
     },
     init: function(){
-      
+      this._super(this);
     }
   });
 
