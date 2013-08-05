@@ -8,7 +8,7 @@
     string: "",
     svg: null,
     html: null,
-    init: function(){
+    init: function(options){
 
     },
     find_by_selector: function(s){
@@ -69,7 +69,11 @@
     render: function(){
       //$(this.el).mousemove(_.bind(this.mousemove,this));
       if (typeof this.el.append == "undefined"){
-        this.el.appendChild(this.model.to_svg());
+        var p=this.el.parentNode;
+        while (p.hasChildNodes()) {
+          p.removeChild(p.lastChild);
+        }
+        p.appendChild(this.model.to_svg());
       }else{
         this.el.append(this.model.to_svg());
         this.el=this.el[0].firstChild;
