@@ -1,6 +1,7 @@
 (function() {
   
   svgb.models.Transform = svgb.Model.extend({
+    _type: "svgb.models.transform",
     defaults: {
       translate:{ x:0, y:0, dirty:false },
       scale:{ sx:0, sy:[0], dirty:false },
@@ -80,7 +81,7 @@
     },
     translate: {
       attr: function( get, set ){
-      this.attr( "translate", get, set );
+        this.attr( "translate", get, set );
       },
       reset: function(){
         this.reset( "translate" );
