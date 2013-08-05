@@ -1,16 +1,18 @@
 (function() {
   svgb.Model = Class.extend({
+    defaults: {},
     attributes: {}, //key,value pairs
     nodes: [],
     init: function(options){
+      this.nodes=[];
       this.attributes={};
-      if (this.defaults){
-        for( var k in this.defaults ){
-          var a = this.defaults[k];
-          this.attributes[k]=a;
-        }
-      }
       if (options){
+        if (options.defaults){
+          for( var k in options.defaults ){
+            var a = options.defaults[k];
+            this.attributes[k]=a;
+          }
+        }
         if (options.nodes) this.nodes = options.nodes;
         if (options.width) this.attributes.width = options.width;
         if (options.height) this.attributes.height = options.height;
@@ -43,7 +45,11 @@
         // log(key + " : "+value);
         if (value && key!='tag'){
           if (typeof value == 'object'){
-            el.setAttributeNS(namespace(key),key,value.join(' '));
+            if (value._type != "svgb.models.transform"){
+              el.setAttributeNS(namespace(key),key,value.join(' '));
+            } else {
+              if (value.to_s()) el.setAttributeNS(namespace(key),key,value.to_s());
+            }
           } else if (key.indexOf(":")>0){
             el.setAttributeNS(namespace(key),key,value);
           }else {
@@ -62,6 +68,11 @@
       }
 
       traverse(this.attributes,process,el);
+      
+      for( var i = 0 ; i < this.nodes.length ; i++ ){
+        el.appendChild(this.nodes[i].to_svg());
+      }
+
       return el;
     }
     // to_svg: function(v){
