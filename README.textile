@@ -1,8 +1,8 @@
 h1. svgb
 
-h3. A boilerplate for your svg and backbone objects
+h3. A boilerplate for building svg interfaces
 
-__svgb__ attempts to facilitate using SVG for ui controls and other graphcs.
+__svgb__ attempts to facilitate using SVG for ui controls and other graphcal interfaces.
 
 
 h2. Description
@@ -11,63 +11,24 @@ The current state of this project is crude.
 
 So far this is how to set the frame and stage up to have your svg injected into it:
 
-bc.. <script type="text/javascript">
-  jQuery(function(){
-    var svgb_collection = new SVGBStages(
-      [{
-        name:'main', 
-        transform:'translate(0,0)', 
-        options: ''
-      }]);
-    var svgb_model = new SVGBFrame({
-        id:'0',
-        height:'500',
-        width:'500',
-        viewbox:'0 0 200 200',
-        options:''
-      });
-    var svgb_view = new SVGBFrameView({ 
-        collection:svgb_collection,
-        model:svgb_model
-      });
-    var svgb_ctrl_cursor_pos = new SVGBControl({
-        name:'mouse_coords',
-        x:0,
-        y:0
-      });
-    $("#container").append(svgb_view.render().el);
-  })
+bc.. <div id="frame"></div>
+<script type="text/javascript">
+  
+  var el = document.getElementById('frame');
+
+  var model = new svgb.models.Frame({height:200,width:300});
+  var view = new svgb.views.Frame({el: el, model: model});
+
+  view.render();
+
+  var r = new svgb.models.Rect({x:10, y:10, height:100, width:100});
+
+  view.model.append(r);
+  view.render();
+
 </script>
 
 p. 
-
-Templates are defined as such:
-
-bc.. <script type="text/template" id="svgb-path">
-  <path d="<@= d @>" <@= options @>/>
-</script>
-
-p. Using <==@== ==@==> and <==@=== ==@==> for client side interpolation
-
-h3. Coming down the pipe:
-
-* Controls
-* I/O events
-* Dropping a Point
-* Drawing a line between Points
-* Using a control to build a Dialog
-* Backbone models: shape, point, transform
-* Rails models: frame, stage, template 
-
-
-h2. Documentation
-
-h3. Configuration
-
-* This is currently just a rails project, more details to come soon..
-
-*TODO*
-
 
 h3. Installation
 
@@ -75,15 +36,11 @@ h3. Installation
 
 In a terminal, navigate to your desired install directory and run:
 
-bc.. $ git clone *fillmein.github.com\svgb.git*
+bc.. $ git clone https://github.com/raddrick/svgb.js.git
 
-$ cd svgb
+$ cd svgb.js
 
-$ bundle install
-
-$ rake db:create db:migrate
-
-$ rails s
+$ ./server
 
 h2. Copyright and licensing
 
