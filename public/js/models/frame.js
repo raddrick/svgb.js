@@ -19,7 +19,12 @@
         if (options.width) this.defaults.width = options.width;
         if (options.height) this.defaults.height = options.height;
       }
-      this._super(this.defaults);
+      this._super(this);
+    },
+    viewbox: {
+      reset: function(){
+        this.attributes.viewBox = [0,0,this.attributes.height,this.attributes.width];
+      }
     }
   });
 })();
