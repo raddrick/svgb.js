@@ -14,6 +14,7 @@
 
       //if (options.stages) this.options.stages.bind('reset', this.render);
       //if (options.controls) this.options.controls.bind('reset', this.render);
+      this._super(options);
     },
     //Events
     mousemove: function(evt){
