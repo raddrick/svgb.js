@@ -4,37 +4,45 @@
 //   y
 //   options
   svgb.models.Point = svgb.Model.extend({
-    events:null,
+    _type:"svgb.model.point",
+    events:{},
     defaults: {
-      'tag': '',
-      'id': '',
-      'x': 0,
-      'y':0,
-      'class':'',
-      'style':'',
-      'defs':'',
-      'transform':'' //TODO: support array values for int's
-    },
-    init: function(options){
-      this._super();
-      this.transform = new svgb.models.Transform();
-      //if (this.attributes.tag) this.render();
-      if (options.x)      this.attributes.x = options.x;
-      if (options.y)      this.attributes.y = options.y;
-      if (options.css)    this.attributes.css = options.css;
-      if (options.style)  this.attributes.style = options.style;
-      if (options.defs)   this.attributes.defs = options.defs;
-      if (options.transform) this.attributes.transform = options.transform;
+      tag: 'circle',
+      id: '',
+      x: 0,
+      y: 0,
+      cx: 0,
+      cy: 0,
+      r: 3,
+      css: '',
+      style: '',
+      defs: '',
+      transform:'' //TODO: support array values for int's
     },
     transform: null,
-    setPin: function(){
-      this.attributes.tag = "circle";
-      this.attributes.css="pin";
-      this.attributes.r=3;
-      this.attributes.cx=this.attributes.x;
-      this.attributes.cy=this.attributes.y;
-      this.attributes.x="";
-      this.attributes.y="";
+    init: function(options){
+      this.transform = new svgb.models.Transform({});
+      //if (this.attributes.tag) this.render();
+      if (options.x)      this.defaults.x = options.x;
+      if (options.y)      this.defaults.y = options.y;
+      if (options.css)    this.defaults.css = options.css;
+      if (options.style)  this.defaults.style = options.style;
+      if (options.defs)   this.defaults.defs = options.defs;
+      if (options.transform) this.defaults.transform = options.transform;
+
+      this._super(this);
+      //this.pin.set_attrs();
+    },
+    pin:{
+      set_attrs: function(){
+        this.attributes.tag = "circle";
+        this.attributes.css="pin";
+        this.attributes.r=3;
+        this.attributes.cx=this.attributes.x;
+        this.attributes.cy=this.attributes.y;
+        this.attributes.x="";
+        this.attributes.y="";
+      }
     },
     move: function( add_x, add_y, time_ms ){
       
