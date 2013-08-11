@@ -2,80 +2,89 @@
   
   svgb.models.Transform = svgb.Model.extend({
     _type: "svgb.models.transform",
+    dirty: false,
     defaults: {
-      translate:{ x:0, y:0, dirty:false },
-      scale:{ sx:0, sy:[0], dirty:false },
+      translate:{ x:0, y:0, dirty: false },
+      scale:{ sx:0, sy:[0], dirty: false },
       matrix:{
         scalex:0, skewx:0,
         skewy:0, scaley:0,
         transformx:0, transformy:0,
-        dirty:false
+        dirty: false
       },
-      rotate:{ angle:0, cx:[0], cy:[0], dirty:false },
-      skew:{ x:0, y:[0], dirty:false },
-      skewX:{ angle:0, dirty:false },
-      skewY:{ angle:0, dirty:false }
+      rotate:{ angle:0, cx:[0], cy:[0], dirty: false },
+      skew:{ x:0, y:[0], dirty: false },
+      skewX:{ angle:0, dirty: false },
+      skewY:{ angle:0, dirty: false }
     },
     initialize: function(){
       
     },
     attr: function( options ){
       var t = null;
-      var m = this.attributes;
+      var m = this.defaults;
       if (options.translate){
         t = options.translate;
         m.translate.x=t.x?t.x:0;
         m.translate.y=t.y?t.y:0;
         m.translate.dirty=true;
+        this.dirty=true;
       }
       if (options.scale){
         t = options.scale;
-        m.translate.sx=t.sx?t.sx:1;
-        m.translate.sy=[t.sy?t.sy:1];
-        m.translate.dirty=true;
+        m.scale.sx=t.sx?t.sx:1;
+        m.scale.sy=[t.sy?t.sy:1];
+        m.scale.dirty=true;
+        this.dirty=true;
       }
       if (options.matrix){
         t = options.matrix;
-        if (typeof t == "array"){
-          m.translate.scalex=t[0];
-          m.translate.skewx=t[1];
-          m.translate.skewy=t[2];
-          m.translate.scaley=t[3];
-          m.translate.transformx=t[4];
-          m.translate.transformy=t[5];
-          m.translate.dirty=true;
+        if (typeof t.push == "function"){
+          m.matrix.scalex=t[0];
+          m.matrix.skewx=t[1];
+          m.matrix.skewy=t[2];
+          m.matrix.scaley=t[3];
+          m.matrix.transformx=t[4];
+          m.matrix.transformy=t[5];
+          m.matrix.dirty=true;
+          this.dirty=true;
         }else{
-          m.translate.scalex=t.scalex?t.scalex:0;
-          m.translate.skewx=t.skewx?t.skewx:0;
-          m.translate.skewy=t.skewy?t.skewy:0;
-          m.translate.scaley=t.scaley?t.scaley:0;
-          m.translate.transformx=t.transformx?t.transformx:0;
-          m.translate.transformy=t.transformy?t.transformy:0;
-          m.translate.dirty=true;
+          m.matrix.scalex=t.scalex?t.scalex:0;
+          m.matrix.skewx=t.skewx?t.skewx:0;
+          m.matrix.skewy=t.skewy?t.skewy:0;
+          m.matrix.scaley=t.scaley?t.scaley:0;
+          m.matrix.transformx=t.transformx?t.transformx:0;
+          m.matrix.transformy=t.transformy?t.transformy:0;
+          m.matrix.dirty=true;
+          this.dirty=true;
         }
       }
       if (options.rotate){
         t = options.rotate;
-        m.translate.angle=t.angle?t.angle:0;
-        m.translate.cx=[t.cx?t.cx:0];
-        m.translate.cy=[t.cy?t.cy:0];
-        m.translate.dirty=true;
+        m.rotate.angle=t.angle?t.angle:0;
+        m.rotate.cx=[t.cx?t.cx:0];
+        m.rotate.cy=[t.cy?t.cy:0];
+        m.rotate.dirty=true;
+        this.dirty=true;
       }
       if (options.skew){
         t = options.skew;
-        m.translate.x=t.x?t.x:0;
-        m.translate.y=[t.y?t.y:0];
-        m.translate.dirty=true;
+        m.skew.x=t.x?t.x:0;
+        m.skew.y=[t.y?t.y:0];
+        m.skew.dirty=true;
+        this.dirty=true;
       }
       if (options.skewX){
         t = options.skewX;
-        m.translate.angle=t.angle?t.angle:0;
-        m.translate.dirty=true;
+        m.skewX.angle=t.angle?t.angle:0;
+        m.skewX.dirty=true;
+        this.dirty=true;
       }
       if (options.skewY){
         t = options.skewY;
-        m.translate.angle=t.angle?t.angle:0;
-        m.translate.dirty=true;
+        m.skewY.angle=t.angle?t.angle:0;
+        m.skewY.dirty=true;
+        this.dirty=true;
       }
       return this.to_s();
     },
@@ -144,7 +153,7 @@
       }
     },
     to_s: function(){
-
+      this.dirty = false;
       var res = "";
 
       //  this goes through each element of this.attributes and then each
@@ -180,7 +189,7 @@
 
       }
 
-      traverse(this.attributes,process);
+      traverse(this.defaults,process);
 
       //TODO when stacking transformations, order counts.  consider using a weighting system
       return  res.length > 0 ? res.substring(0, res.length - 1) : false;
