@@ -1,7 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>svgb - js library</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="/public/vendor/js/jquery.js"></script>
+    <script type="text/javascript" src="/public/vendor/js/bootstrap.js"></script>
     <!-- <script type="text/javascript" src="/public/js/templates/templates.js"></script> -->
     <script type="text/javascript" src="/public/js/lib/svgb.js"></script>
     <script type="text/javascript" src="/public/js/lib/soi.js"></script>
@@ -27,7 +31,8 @@
     <!-- <script type="text/javascript" src="/js/views/stage.js"></script>
          <script type="text/javascript" src="/js/collections/controls.js"></script> 
     -->
-    <link rel="stylesheet" type="text/css" href="/public/stylesheets/application.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/application.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/vendor/css/bootstrap.css"/>
     <style type="text/css">
       body { font-family: Arial, Verdana; }
       ul { padding-left: 10px; }
@@ -44,44 +49,63 @@
 
 	</head>
 	<body>
-		<h1>svgb</h1>
-    <h3>Test suite</h3>
-    <desc>
-      A js library for SVG objects
-    </desc>
-    <ul>
-      <li>
-        <ul>
-          <li>
-            <table class="frame">
-              <thead>
-                <tr><th colspan="2">Frame</th></tr>
-              </thead>
-              <tfoot>
-                <tr><td colspan="2"></td></tr>
-              </tfoot>
-              <tbody>
-                <tr class="default"><td class="name">default</td><td class="test"></td></tr>
-                <tr class="point"><td class="name">point</td><td class="test"></td></tr>
-                <tr class="100x100"><td class="name">100x100</td><td class="test"></td></tr>
-              </tbody>
-            </table>
-          </li>
-          <!--li>
-            <h4>Shapes</h4>
-            <table>
-              <!--tr class="point"><td class="name">Point</td></td><td class="test"></td></tr-->
-              <!--tr class="name"><td class="name">Line</td></td><td class="test"></td></tr-->
-              <!--tr><td class="name">Rect</td></td><td class="test"></td></tr-->
-              <!--tr><td class="name">Elipse</td></td><td class="test"></td></tr-->
-              <!--tr><td class="name">Polyline</td></td><td class="test"></td></tr-->
-              <!--tr><td class="name">Polygone</td></td><td class="test"></td></tr-->
-              <!--tr><td class="name">Path</td></td><td class="test"></td></tr-->
-            </table>
-          </li-->
-        </ul>
-      </li>
-    </ul>
+    <div class='container'>
+  		<h1>svgb</h1>
+      <h3>Test suite</h3>
+      <desc>
+        A js library for SVG objects
+      </desc>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <table class="frame">
+                <thead>
+                  <tr><th colspan="2">Frame</th></tr>
+                </thead>
+                <tfoot>
+                  <tr><td colspan="2"></td></tr>
+                </tfoot>
+                <tbody>
+                  <tr class="default"><td class="name">default</td><td class="test"></td></tr>
+                  <tr class="100x100"><td class="name">100x100</td><td class="test"></td></tr>
+                  <tr class="300x200"><td class="name">300x200</td><td class="test"></td></tr>
+                  <tr class="viewBox"><td class="name"></td><td class="test"></td></tr>
+                  <tr class="pan"><td class="name"></td><td class="test"></td></tr>
+                  <tr class="zoom"><td class="name"></td><td class="test"></td></tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <table class="shapes">
+                <thead>Shapes
+                  <tr><th colspan="2">Frame</th></tr>
+                </thead>
+                <tfoot>
+                  <tr><td colspan="2"></td></tr>
+                </tfoot>
+                <tbody>
+                  <tr class="point"><td class="name">point</td><td class="test"></td></tr>
+                  <tr class="rect"><td class="name">rect</td><td class="test"></td></tr>
+                </tbody>
+              </table>
+            </li>
+            <!--li>
+              <h4>Shapes</h4>
+              <table>
+                <!--tr class="point"><td class="name">Point</td></td><td class="test"></td></tr-->
+                <!--tr class="name"><td class="name">Line</td></td><td class="test"></td></tr-->
+                <!--tr><td class="name">Rect</td></td><td class="test"></td></tr-->
+                <!--tr><td class="name">Elipse</td></td><td class="test"></td></tr-->
+                <!--tr><td class="name">Polyline</td></td><td class="test"></td></tr-->
+                <!--tr><td class="name">Polygone</td></td><td class="test"></td></tr-->
+                <!--tr><td class="name">Path</td></td><td class="test"></td></tr-->
+              </table>
+            </li-->
+          </ul>
+        </li>
+      </ul>
+    </div>
     <script type="text/javascript">
       var tests = {
         //test definitions
@@ -89,26 +113,32 @@
           var m="test should render an svg frame with no options"
           var frame=setup("tr.default",{'message':m});
 
+          console.log("TEST >> Default")
+          console.log(m);
           console.log(frame);
         },
         "point": function(){
           var m="test should render an svg frame that is 100x100"
           var frame=setup("tr.point",{'message':m});
 
-          var p=new svgb.models.Point({x:100, y:100});
-          frame.model.append(p);
+          var p=new svgb.models.Point({x:50, y:50});
+          frame.model.append(p.to_svg(true));
           frame.update();
 
+          console.log("TEST >> Point")
+          console.log(m);
           console.log(frame);
         },
-        "100x100": function(){
-          var m="test should render an svg frame that is 100x100"
-          var frame=setup("tr.100x100",{'message':m});
+        "rect": function(){
+          var m="test should render an svg rect that is 50x50"
+          var frame=setup("tr.rect",{'message':m});
 
-          var r=new svgb.models.Rect({x:10, y:10, height:100, width:100});
-          frame.model.append(r);
+          var r=new svgb.models.Rect({x:10, y:10, height:50, width:50});
+          frame.model.append(r.to_svg());
           frame.update();
 
+          console.log("TEST >> Rect")
+          console.log(m);
           console.log(frame);
         },
         //this method will iterate through the tests and execute them
@@ -117,6 +147,13 @@
             if(t!="run") this[t]();
           }
           return this;
+        // },
+        // check: {
+        //   content: {
+        //     for: function(reg_ex){
+              
+        //     }
+        //   }
         }
       }
       tests.run();
@@ -132,7 +169,7 @@
           // within.
           create: function(options){
             if (options.el) this.el=options.el;
-            this.model=new svgb.models.Frame({height:200,width:300});
+            this.model=new svgb.models.Frame({height:100,width:150});
             this.view=new svgb.views.Frame({el: this.el, model: this.model});
             this.update();
             return this;
@@ -150,7 +187,7 @@
         };
 
         return frame.create({
-          el: ".frame " + selector + " td.test",
+          el: selector + " td.test",
         });
       }
 
