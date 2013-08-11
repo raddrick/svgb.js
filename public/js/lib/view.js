@@ -76,7 +76,7 @@
         p.appendChild(this.model.to_svg());
       }else{
         this.el.append(this.model.to_svg());
-        this.el=this.el[0].firstChild;
+        if (this.el[0]) this.el=this.el[0].firstChild;
       }
       return this.el;
     }

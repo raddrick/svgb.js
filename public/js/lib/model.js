@@ -19,12 +19,13 @@
       }
     },
     append: function(node){
+      console.log(">>> APPEND NODE vvv");
       console.log(node);
       if (node) this.nodes.push(node);
     },
     to_svg: function(){
       var str = "";
-       var el = document.createElementNS(SVGNS, this.attributes.tag);
+      var el = document.createElementNS(SVGNS, this.attributes.tag);
 
       function process(key,value,el) {
         function namespace(key){
@@ -70,7 +71,10 @@
       traverse(this.attributes,process,el);
       
       for( var i = 0 ; i < this.nodes.length ; i++ ){
-        el.appendChild(this.nodes[i].to_svg());
+        if (typeof this.nodes[i].to_svg != 'undefined')
+          el.appendChild(this.nodes[i].to_svg());
+        else
+          el.appendChild(this.nodes[i]);
       }
 
       return el;
