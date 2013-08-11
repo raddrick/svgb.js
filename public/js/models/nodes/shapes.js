@@ -7,7 +7,7 @@
       d: ""
     },
     init: function(){
-      this._super(this);
+      this._super(options);
     }
   });
 
@@ -21,7 +21,7 @@
       y2: 0
     },
     init: function(){
-      this._super(this);
+      this._super(options);
     }
   });
 
@@ -33,7 +33,7 @@
       points: []
     },
     init: function(){
-      this._super(this);
+      this._super(options);
     }
   });
 
@@ -45,7 +45,7 @@
       points: []
     },
     init: function(){
-      this._super(this);
+      this._super(options);
       
     }
   });
@@ -53,12 +53,15 @@
 // circle
 //   r
   window.svgb.models.Circle = window.svgb.models.Point.extend({
+    _type: 'svgb.model.circle',
     defaults: {
       tag: 'circle',
+      cx: 0,
+      cy: 0,
       r: 0
     },
     init: function(){
-      this._super(this);
+      this._super(options);
     }
   });
     
@@ -66,6 +69,7 @@
 //   height
 //   width
   window.svgb.models.Rect = window.svgb.models.Point.extend({
+    _type: 'svgb.model.rect',
     node: null,
     defaults: {
       tag: 'rect',
@@ -75,7 +79,7 @@
     init: function(options){
       if (options.width) this.defaults.width=options.width;
       if (options.height) this.defaults.height=options.height;
-      this._super(this);
+      this._super(options);
     }
   });
 
@@ -89,7 +93,7 @@
       ry:0
     },
     init: function(){
-      this._super(this);
+      this._super(options);
     }
   });
 
