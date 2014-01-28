@@ -125,8 +125,8 @@
           console.log(frame);
         },
         "point": function(){
-          var m="test should render an svg frame that is 100x100"
-          var frame=setup("tr.point",{'message':m});
+          var m="test should render an point at 50,50"
+          var frame=setup("tr.point",{message:m, height:100, width:100});
 
           var p=new svgb.models.Point({x:50, y:50});
           frame.model.append(p.to_svg(true));
