@@ -110,7 +110,12 @@
         //test definitions
         default: function(){
           var m="test should render an svg frame with no options"
-          var frame=setup("tr.default",{'message':m});
+          var frame=setup("tr.default",{message:m});
+
+          console.log("TEST >> Default")
+          console.log(m);
+          console.log(frame);
+        },
 
           console.log("TEST >> Default")
           console.log(m);
