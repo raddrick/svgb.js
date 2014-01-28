@@ -13,7 +13,7 @@
     },
     find_by_selector: function(s){
       return $(s);
-
+      //TODO THIS IS NOT RUNNING \/  \/  \/  \/  \/
       s=s.spilt(" ");
       var el=null;
       for(var i=0 ; i<s.length ; i++){
