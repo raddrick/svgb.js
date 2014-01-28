@@ -5,12 +5,12 @@
   svgb.models.Frame = svgb.Model.extend({
     _type: "svgb.model.Frame",
     view: null,
+    masked:true,
     defaults: {
-      'tag':'svg',
-      'viewBox': [0,0,200,200],
-      'width':500,
-      'height':500,
-      'masked':true
+      tag:'svg',
+      viewBox: [0,0,300,200],
+      width:300,
+      height:200
     },
     init: function(options){
       if (options){
