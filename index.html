@@ -176,7 +176,7 @@
           // within.
           create: function(options){
             if (options.el) this.el=options.el;
-            this.model=new svgb.models.Frame({height:100,width:150});
+            this.model=new svgb.models.Frame({height:options.height,width:options.width});
             this.view=new svgb.views.Frame({el: this.el, model: this.model});
             this.update();
             return this;
