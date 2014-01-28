@@ -137,10 +137,10 @@
           console.log(frame);
         },
         "rect": function(){
-          var m="test should render an svg rect that is 50x50"
-          var frame=setup("tr.rect",{'message':m});
+          var m="test should render an svg rect that is 80x80"
+          var frame=setup("tr.rect",{message:m, height:100, width:100});
 
-          var r=new svgb.models.Rect({x:10, y:10, height:50, width:50});
+          var r=new svgb.models.Rect({x:10, y:10, height:80, width:80});
           frame.model.append(r.to_svg());
           frame.update();
 
